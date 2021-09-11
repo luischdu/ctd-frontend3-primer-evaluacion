@@ -21,25 +21,37 @@ export class App extends Component {
   }
 
   handleClick = (e) => {
-    if (e.target.id === "A") {
+    let option = e.target.id;
+    console.log(option);
+    if (this.state.contador >= 7) {
+      alert("Fin del juego");
+    } else if (option === "A" && this.state.seleccionPrevia !== "A") {
       this.setState({
-        seleccionPrevia: "A",
+        seleccionPrevia: option,
         contador: this.state.contador + 1,
       });
-    } else {
+    } else if (option === "A" && this.state.seleccionPrevia === "A") {
       this.setState({
-        seleccionPrevia: "B",
-        contador: this.state.contador + 1,
+        seleccionPrevia: option,
+        contador: this.state.contador + 2,
+      });
+    } else if (option === "B" && this.state.seleccionPrevia !== "A") {
+      this.setState({
+        seleccionPrevia: option,
+        contador: this.state.contador + 2,
+      });
+    } else if (option === "B" && this.state.seleccionPrevia === "A") {
+      this.setState({
+        seleccionPrevia: option,
+        contador: this.state.contador + 3,
       });
     }
   };
-
 
   render() {
     return (
       <div className="App">
         <div className="layout">
-          
           <History historia={data[this.state.contador].historia} />
           <Options
             handleClick={this.handleClick}
